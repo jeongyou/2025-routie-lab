@@ -2,20 +2,24 @@ name: release-please (frontend only)
 
 on:
   push:
-    branches: [ main ]      # 릴리스 PR을 만들 브랜치
+    branches: [ main ]          # ✅ main에 push될 때 릴리스 PR 생성
     paths:
-      - 'frontend/**'          # 프론트 변경 있을 때만 실행
+      - 'frontend/**'
       - '.github/workflows/**'
-  workflow_dispatch: {}        # 수동 실행 허용
+  workflow_dispatch: {}
 
 jobs:
   release:
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write            # ✅ 태그/Release 작성 권한
+      pull-requests: write       # ✅ PR 작성 권한
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v4
         with:
-          config-file: release-please-config.json
-          manifest-file: release-please-manifest.json
+          release-type: node
+          path: frontend             # ✅ package.json 있는 위치
+          target-branch: main        # ✅ 릴리스 PR을 main으로 생성
+          monorepo-tags: true        # 태그에 컴포넌트명 포함 (frontend-v1.2.3)
+          include-v-in-tag: true     # 태그 앞에 v 붙이기
+          bump-minor-pre-major: true # 0.x 단계에서는 breaking도 minor로 올리기
