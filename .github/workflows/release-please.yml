@@ -1,0 +1,25 @@
+name: release-please (frontend only)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/**'
+  workflow_dispatch: {}
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          release-type: node
+          path: frontend
+          target-branch: main
+          monorepo-tags: true
+          include-v-in-tag: true
+          bump-minor-pre-major: true
