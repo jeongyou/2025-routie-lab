@@ -1,0 +1,18 @@
+name: release-please
+
+on:
+  push:
+    branches: [ main ]   # 기본 브랜치 이름에 맞게 변경
+  workflow_dispatch: {}  # 수동 실행도 허용
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          release-type: node          # Node/TS라면 node, 라이브러리 종류에 맞게 변경
+          package-name: your-package  # 패키지명(선택, npm 배포 안 해도 OK)
