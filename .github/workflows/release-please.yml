@@ -1,9 +1,12 @@
-name: release-please
+name: release-please (frontend only)
 
 on:
   push:
-    branches: [ develop ]   # 기본 브랜치 이름에 맞게 변경
-  workflow_dispatch: {}  # 수동 실행도 허용
+    branches: [ main ]      # 릴리스 PR을 만들 브랜치
+    paths:
+      - 'frontend/**'          # 프론트 변경 있을 때만 실행
+      - '.github/workflows/**'
+  workflow_dispatch: {}        # 수동 실행 허용
 
 jobs:
   release:
@@ -14,5 +17,5 @@ jobs:
     steps:
       - uses: googleapis/release-please-action@v4
         with:
-          release-type: node          # Node/TS라면 node, 라이브러리 종류에 맞게 변경
-          package-name: routie  # 패키지명(선택, npm 배포 안 해도 OK)
+          config-file: release-please-config.json
+          manifest-file: release-please-manifest.json
