@@ -2,12 +2,12 @@
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "packages": {
     "frontend": {
+      "path": "frontend",
       "release-type": "node",
       "changelog-path": "frontend/CHANGELOG.md",
       "bump-minor-pre-major": true,
       "include-v-in-tag": true,
-      "include-component-in-tag": true,
-      "bootstrap-sha": "303f4349e75f730f23f01d93bd4ba6ffe79f7101"
+      "include-component-in-tag": true
     }
   }
 }
