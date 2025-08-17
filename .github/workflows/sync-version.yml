@@ -24,12 +24,24 @@ jobs:
           jq ".version = \"${VERSION}\"" frontend/package.json > tmp.json
           mv tmp.json frontend/package.json
 
-      - name: Create Pull Request
+      # === main 대상 PR 생성 ===
+      - name: Create PR to main
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: sync-version/${{ env.VERSION }}
+          branch: sync-version/main-${{ env.VERSION }}
           base: main
-          title: "chore: sync frontend package.json to ${{ env.VERSION }}"
-          body: "자동 생성된 package.json 버전 동기화 PR"
+          title: "chore: sync frontend package.json to ${{ env.VERSION }} (main)"
+          body: "자동 생성된 package.json 버전 동기화 PR (main)"
+          commit-message: "chore: sync frontend package.json to ${{ env.VERSION }}"
+          delete-branch: true
+
+      # === develop 대상 PR 생성 ===
+      - name: Create PR to develop
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: sync-version/develop-${{ env.VERSION }}
+          base: develop
+          title: "chore: sync frontend package.json to ${{ env.VERSION }} (develop)"
+          body: "자동 생성된 package.json 버전 동기화 PR (develop)"
           commit-message: "chore: sync frontend package.json to ${{ env.VERSION }}"
           delete-branch: true
