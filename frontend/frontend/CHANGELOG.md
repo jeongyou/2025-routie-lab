@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/jeongyou/2025-routie-lab/compare/frontend-v0.1.1...frontend-v0.2.0) (2025-08-17)
+
+
+### Features
+
+* 어찌고 저찌고 배포 함 ([#16](https://github.com/jeongyou/2025-routie-lab/issues/16)) ([fc4e3c6](https://github.com/jeongyou/2025-routie-lab/commit/fc4e3c61ec0db1c15e82f8de9be40d0bd74eadd5))
+
 ## [0.1.1](https://github.com/jeongyou/2025-routie-lab/compare/frontend-v0.1.0...frontend-v0.1.1) (2025-08-17)
 
 
