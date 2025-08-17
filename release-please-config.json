@@ -7,7 +7,16 @@
       "changelog-path": "frontend/CHANGELOG.md",
       "bump-minor-pre-major": true,
       "include-v-in-tag": true,
-      "include-component-in-tag": true
+      "include-component-in-tag": true,
+      "changelog-sections": [
+        { "type": "feat", "section": "✨ 새로운 기능" },
+        { "type": "fix", "section": "🐛 버그 수정" },
+        { "type": "docs", "section": "📝 문서 변경" },
+        { "type": "style", "section": "💄 스타일 변경" },
+        { "type": "refactor", "section": "♻️ 리팩토링" },
+        { "type": "test", "section": "✅ 테스트" },
+        { "type": "chore", "section": "🔧 기타 변경" }
+      ]
     }
   }
 }
