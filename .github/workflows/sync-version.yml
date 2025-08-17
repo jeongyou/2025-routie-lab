@@ -2,13 +2,19 @@ name: Sync package.json version
 
 on:
   release:
-    types: [published] # main에서 릴리스가 생성될 때 실행됨
+    types: [published]
 
 jobs:
   sync-version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Extract version from tag
         run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
@@ -18,18 +24,12 @@ jobs:
           jq ".version = \"${VERSION}\"" frontend/package.json > tmp.json
           mv tmp.json frontend/package.json
 
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b sync-version/${VERSION}
-          git add frontend/package.json
-          git commit -m "chore: sync frontend package.json to ${VERSION}"
-          git push origin sync-version/${VERSION}
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           branch: sync-version/${{ env.VERSION }}
+          base: main
           title: "chore: sync frontend package.json to ${{ env.VERSION }}"
           body: "자동 생성된 package.json 버전 동기화 PR"
+          commit-message: "chore: sync frontend package.json to ${{ env.VERSION }}"
+          delete-branch: true
