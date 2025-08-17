@@ -16,7 +16,8 @@
         { "type": "refactor", "section": "♻️ 리팩토링" },
         { "type": "test", "section": "✅ 테스트" },
         { "type": "chore", "section": "🔧 기타 변경" }
-      ]
+      ],
+       "skip-github-release": true 
     }
   }
 }
