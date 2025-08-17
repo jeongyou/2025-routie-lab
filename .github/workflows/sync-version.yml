@@ -5,43 +5,59 @@ on:
     types: [published]
 
 jobs:
-  sync-version:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+    steps:
+      - name: Extract version from tag
+        id: get-version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+  sync-main:
+    needs: prepare
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
-
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Extract version from tag
-        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
-
       - name: Update frontend/package.json version
         run: |
-          jq ".version = \"${VERSION}\"" frontend/package.json > tmp.json
+          jq ".version = \"${{ needs.prepare.outputs.version }}\"" frontend/package.json > tmp.json
           mv tmp.json frontend/package.json
-
-      # === main 대상 PR 생성 ===
       - name: Create PR to main
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: sync-version/main-${{ env.VERSION }}
+          branch: sync-version/main-${{ needs.prepare.outputs.version }}
           base: main
-          title: "chore: sync frontend package.json to ${{ env.VERSION }} (main)"
+          title: "chore: sync frontend package.json to ${{ needs.prepare.outputs.version }} (main)"
           body: "자동 생성된 package.json 버전 동기화 PR (main)"
-          commit-message: "chore: sync frontend package.json to ${{ env.VERSION }}"
+          commit-message: "chore: sync frontend package.json to ${{ needs.prepare.outputs.version }}"
           delete-branch: true
 
-      # === develop 대상 PR 생성 ===
+  sync-develop:
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update frontend/package.json version
+        run: |
+          jq ".version = \"${{ needs.prepare.outputs.version }}\"" frontend/package.json > tmp.json
+          mv tmp.json frontend/package.json
       - name: Create PR to develop
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: sync-version/develop-${{ env.VERSION }}
+          branch: sync-version/develop-${{ needs.prepare.outputs.version }}
           base: develop
-          title: "chore: sync frontend package.json to ${{ env.VERSION }} (develop)"
+          title: "chore: sync frontend package.json to ${{ needs.prepare.outputs.version }} (develop)"
           body: "자동 생성된 package.json 버전 동기화 PR (develop)"
-          commit-message: "chore: sync frontend package.json to ${{ env.VERSION }}"
+          commit-message: "chore: sync frontend package.json to ${{ needs.prepare.outputs.version }}"
           delete-branch: true
