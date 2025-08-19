@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.1](https://github.com/jeongyou/2025-routie-lab/compare/frontend-v0.2.0...frontend-v0.2.1) (2025-08-19)
+
+
+### 🔧 기타 변경
+
+* sync frontend package.json to 0.5.0 ([b2ba6ae](https://github.com/jeongyou/2025-routie-lab/commit/b2ba6ae5159d41bd0f69781fd70b0627695961a4))
+* sync frontend package.json to 0.5.2 ([#18](https://github.com/jeongyou/2025-routie-lab/issues/18)) ([0340039](https://github.com/jeongyou/2025-routie-lab/commit/0340039db12c6dc014913ad6036b39f9a015a356))
+* sync frontend package.json to 0.6.2 ([#20](https://github.com/jeongyou/2025-routie-lab/issues/20)) ([fa50518](https://github.com/jeongyou/2025-routie-lab/commit/fa50518f1cc6017a3b22b5191c7333ca1616d64f))
+
 ## [0.2.0](https://github.com/jeongyou/2025-routie-lab/compare/frontend-v0.1.1...frontend-v0.2.0) (2025-08-17)
 
 
