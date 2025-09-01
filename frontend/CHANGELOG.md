@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/jeongyou/2025-routie-lab/compare/v1.0.0...v1.1.0) (2025-09-01)
+
+
+### Features
+
+* ㅇ ([de8cc24](https://github.com/jeongyou/2025-routie-lab/commit/de8cc243d296b8d9df41e22f27f000f7f7b0ed08))
+
 ## 1.0.0 (2025-09-01)
 
 
