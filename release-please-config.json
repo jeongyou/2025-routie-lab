@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "include-component-in-tag": false,
   "packages": {
-    "frontend": {
+    "app": {
       "path": "frontend",
       "release-type": "node",
       "package-name": "routie-frontend",
