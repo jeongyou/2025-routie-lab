@@ -1,13 +1,11 @@
-name: release-please (app only)
+name: release-please (app)
 
 on:
   push:
     branches: [ main ]
     paths:
       - 'frontend/**'
-      - 'release-please-config.json'
-      - '.release-please-manifest.json'
-      - '.github/workflows/release-please.yml'
+      - 'backend/**'
   workflow_dispatch: {}
 
 permissions:
